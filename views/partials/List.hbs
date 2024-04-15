@@ -1,0 +1,26 @@
+<div class="NumbersBook">
+    {{#if clickable}}
+        <style>
+        .disabled-link {
+        pointer-events: none;
+        }
+    </style>
+    {{/if}}
+    <ul>
+        {{#each users}}
+            <li>
+                {{#with .}}
+                <a 
+                id="{{id}}" 
+                class="ElemString disabled-link"
+                href="/update?id={{id}}"
+                >
+                    <p class="elem">{{name}} {{second_name}}</p>
+                    <p class="elem">+{{number}}</p>  
+
+                </a>  
+                {{/with}}
+            </li>
+        {{/each}}
+    </ul>
+</div>

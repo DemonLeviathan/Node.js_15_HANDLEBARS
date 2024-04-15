@@ -1,0 +1,88 @@
+<script>
+    function deleteUser(userId) {
+        fetch(`/delete/${userId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("User deleted successfully");
+                updateUserList();
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function updateUserList() {
+        fetch('/main') 
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('userList').innerHTML = data; 
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    let user = {
+        id: "{{user.id}}",
+        name: "{{user.name}}",
+        second_name: "{{user.second_name}}",
+        number: "{{user.number}}"
+    };
+
+    function checkDeleteButton() {
+        let nameInput = document.getElementsByName('name')[0].value;
+        let secondNameInput = document.getElementsByName('second_name')[0].value;
+        let numberInput = document.getElementsByName('number')[0].value;
+
+        if (nameInput !== user.name || secondNameInput !== user.second_name || numberInput !== user.number) {
+            document.getElementById('delBTN').disabled = true;
+            document.getElementById('delBTN').style.backgroundColor = '#ccc';
+        } else {
+            document.getElementById('delBTN').disabled = false;
+            document.getElementById('delBTN').style.backgroundColor = '#007BFF';
+        }
+    }
+
+    function validateForm() {
+        let name = document.getElementsByName('name')[0].value;
+        let secondName = document.getElementsByName('second_name')[0].value;
+        let number = document.getElementsByName('number')[0].value;
+
+        if (name.length === 0 || secondName.length === 0 || number.length !== 12 || !/^37529\d{7}$/.test(number)) {
+            document.getElementsByName('label')[0].textContent = "Некорректные данные в форме";
+            document.getElementById('btn_submit').disabled = true;
+            document.getElementById('btn_submit').style.backgroundColor = '#ccc';
+        } else {
+            document.getElementsByName('label')[0].textContent = "";
+            document.getElementById('btn_submit').disabled = false;
+            document.getElementById('btn_submit').style.backgroundColor = '#007BFF';
+        }
+    }
+</script>
+
+
+
+<div>
+    <form action="/update" method="POST">
+
+        <div class="Menu">
+            <a type="text" name="label" style="color: red"></a>
+            <input type="hidden" name="id" value="{{user.id}}">
+            <input value="{{user.name}}" name="name" type="text" oninput="Validate()" onchange="deleteblock()" placeholder="Имя" >
+            <input value="{{user.second_name}}" name="second_name" type="text" oninput="Validate()"  onchange="deleteblock()" placeholder="Фамилия" >
+            <input value="{{user.number}}" name="number" type="number" oninput="Validate()" pattern="^37529\d{7}$" placeholder="Номер" >
+       </div>
+
+        <div class="Menu">
+            <button id="btn_submit" type="Submit" onmouseenter="Validate()">Изменить</button>
+            <button id ='delBTN' type="button"  onclick="deleteUser('{{user.id}}')">Удалить</button>
+            <button type="button" onclick="{{exit}}">Отказаться</button>
+        </div>
+
+    </form>
+</div>

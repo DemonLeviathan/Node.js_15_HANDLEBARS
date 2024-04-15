@@ -1,0 +1,53 @@
+<script>
+    function Validate() {
+        let val1 = true;
+        let val2 = true;
+        let val3 = true;
+  
+        
+        if(document.getElementsByName('name')[0].value.length <=0 
+            ||
+            document.getElementsByName('second_name')[0].value.length <=0){
+                document.getElementsByName('label')[0].textContent="Некорректное имя или фамилия";
+                val3=false
+            }
+            
+        var numberValue = document.getElementsByName('number')[0].value;
+        var regex = new RegExp("^37529\\d{7}$");
+        if (!regex.test(numberValue)) {
+            document.getElementsByName('label')[0].textContent="Некорректный номер";
+                val2 = false;
+        }
+
+        if(document.getElementsByName('number')[0].value.length != 12){
+            document.getElementsByName('label')[0].textContent="number != 12";
+            val1 = false;
+        }
+            
+
+        if(val1 && val2 && val3){
+            document.getElementById('btn_submit').disabled = false;
+            document.getElementById('btn_submit').style="background-color: #007BFF;"
+            document.getElementsByName('label')[0].textContent="";
+        }else{
+            document.getElementById('btn_submit').disabled = true;
+            document.getElementById('btn_submit').style="background-color: #ccc;"
+        }
+    }
+</script>
+
+<div>
+    <form method="POST" action="/add">
+        <div class="Menu">
+            <a type="text" name="label" style="color: rgb(253, 75, 75)"></a>
+            <input type="text" name="name" placeholder="Имя" oninput="Validate()">
+            <input type="text" name="second_name" placeholder="Фамилия" oninput="Validate()">
+            <input type="number" name="number" placeholder="Номер" oninput="Validate()">
+        </div>
+         <div class="Menu">
+            <button id ="btn_submit" type="submit" style="background-color: #ccc;" disabled>
+                Добавить</button>
+            <button type="button" onclick="{{exit}}">Отмена</button>
+        </div>
+    </form>
+</div>

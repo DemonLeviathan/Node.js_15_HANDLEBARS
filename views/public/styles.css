@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.NumbersBook, form {
+    width: 500px; 
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.Menu{
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.NumbersBook ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.NumbersBook li {
+    margin-bottom: 10px;
+    border: 1px solid rgba(204, 204, 204, 0); 
+    padding: 0px 0px 0px 10px; 
+}
+
+.NumbersBook a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold; 
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #07203a57;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e91ebc3;
+}
